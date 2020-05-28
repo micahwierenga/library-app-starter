@@ -5,9 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const methodOverride = require('method-override');
 
+require('./config/database');
+
 // WE NEED TO IMPORT OUR ROUTES IN ORDER TO MOUNT THEM BELOW
 const indexRouter = require('./routes/indexRoutes');
 const usersRouter = require('./routes/usersRoutes');
+const authorsRouter = require('./routes/authorsRoutes');
 
 const app = express();
 
@@ -31,6 +34,7 @@ app.use('/', indexRouter);
 // if the request url begins with /users, see if the usersRouter has
 // a match for the request url. if not, move on to the next router.
 app.use('/users', usersRouter);
+app.use('/authors', authorsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
