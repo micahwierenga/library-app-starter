@@ -1,7 +1,20 @@
 <%- include('../partials/headerPartial.ejs') %> 
 
 
-Where all the AUTHORS go
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Actions</td>
+    </tr>
+    <% allAuthorsReferenceForEJS.forEach(function(eachAuthor) { %>
+        <tr>
+            <td><%= eachAuthor.name %></td>
+            <td>
+                <a href="/authors/<%= eachAuthor._id %>">DETAILS</a>
+            </td>
+        </tr>
+    <% }) %>
+</table>
 
 
 

@@ -17,7 +17,11 @@ module.exports = {
 
 // Define getAllAuthors (our index route)
 function getAllAuthors(req, res) {
-    res.send('getAllAuthors');
+    Author.find({}, function(err, allAuthorsFromDb) {
+        res.render('authorsViews/index', {
+            allAuthorsReferenceForEJS: allAuthorsFromDb
+        })
+    })
 }
 
 
