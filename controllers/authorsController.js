@@ -8,6 +8,7 @@ const Author = require('../models/authorModel');
 
 module.exports = {
     getAllAuthors,
+    getNewAuthorForm,
 }
 
 // WE'LL NEED CONTROLLERS TO HANDLE THE REQUEST, WHICH
@@ -29,7 +30,9 @@ function getAllAuthors(req, res) {
 
 
 // Define getNewAuthorForm (our new route)
-
+function getNewAuthorForm(req, res) {
+    res.render('authorsViews/new');
+}
 
 // Define createNewAuthor (our create route)
 

@@ -6,6 +6,7 @@ const authorsController = require('../controllers/authorsController');
 
 
 router.get('/', authorsController.getAllAuthors);
+router.get('/new', authorsController.getNewAuthorForm);
 
 
 
