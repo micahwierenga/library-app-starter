@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const methodOverride = require('method-override');
 
 // WE NEED TO IMPORT OUR ROUTES IN ORDER TO MOUNT THEM BELOW
 const indexRouter = require('./routes/indexRoutes');
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 // WE NEED TO MOUNT OUR ROUTES SO THEY CAN THE NEXT STEP IN
 // DIRECTING REQUESTS TO THE PROPER CONTROLLER
