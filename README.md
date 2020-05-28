@@ -15,6 +15,9 @@
 Beloved, Toni Morrison (1987)
 https://upload.wikimedia.org/wikipedia/commons/3/3a/BelovedNovel.jpg
 
+Song of Solomon, Toni Morrison (1977)
+https://upload.wikimedia.org/wikipedia/en/1/1e/SongOfSolomon.jpg
+
 Mrs. Dalloway, Virginia Woolf (1925)
 https://upload.wikimedia.org/wikipedia/en/6/67/Mrs._Dalloway_cover.jpg
 
