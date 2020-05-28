@@ -9,6 +9,8 @@ const Author = require('../models/authorModel');
 module.exports = {
     getAllAuthors,
     getNewAuthorForm,
+    createNewAuthor,
+    getOneAuthor,
 }
 
 // WE'LL NEED CONTROLLERS TO HANDLE THE REQUEST, WHICH
@@ -27,7 +29,13 @@ function getAllAuthors(req, res) {
 
 
 // Define getOneAuthor (our show route)
-
+function getOneAuthor(req, res) {
+    Author.findById(req.params.authorId, function(err, oneAuthorFromDb) {
+        res.render('authorsViews/show', {
+            authorReferenceForEJS: oneAuthorFromDb
+        })
+    })
+}
 
 // Define getNewAuthorForm (our new route)
 function getNewAuthorForm(req, res) {
@@ -35,7 +43,11 @@ function getNewAuthorForm(req, res) {
 }
 
 // Define createNewAuthor (our create route)
-
+function createNewAuthor(req, res) {
+    Author.create(req.body, function(err, newAuthor) {
+        res.redirect('/authors');
+    })
+}
 
 // Define deleteOneAuthor (our delete/destroy route)
 
