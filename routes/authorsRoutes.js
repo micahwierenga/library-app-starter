@@ -9,6 +9,8 @@ router.get('/', authorsController.getAllAuthors);
 router.get('/new', authorsController.getNewAuthorForm);
 router.get('/:authorId', authorsController.getOneAuthor);
 router.post('/', authorsController.createNewAuthor);
+router.delete('/:authorIdToDelete', authorsController.deleteOneAuthor);
+router.get('/:authorIdForEditForm/edit', authorsController.getEditAuthorForm);
 
 
 

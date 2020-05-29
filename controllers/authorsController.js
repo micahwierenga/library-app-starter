@@ -11,6 +11,8 @@ module.exports = {
     getNewAuthorForm,
     createNewAuthor,
     getOneAuthor,
+    deleteOneAuthor,
+    getEditAuthorForm,
 }
 
 // WE'LL NEED CONTROLLERS TO HANDLE THE REQUEST, WHICH
@@ -50,9 +52,19 @@ function createNewAuthor(req, res) {
 }
 
 // Define deleteOneAuthor (our delete/destroy route)
-
+function deleteOneAuthor(req, res) {
+    Author.findByIdAndRemove(req.params.authorIdToDelete, function(err, deleteAuthorConfirmation) {
+        res.redirect('/authors');
+    })
+}
 
 // Define getEditAuthorForm (our edit route)
-
+function getEditAuthorForm(req, res) {
+    Author.findById(req.params.authorIdForEditForm, function(err, authorToEditFromDb) {
+        res.render('authorsViews/edit', {
+            authorToEditReferenceForEJS: authorToEditFromDb
+        })
+    })
+}
 
 // Define updateOneAuthor (our update route)
