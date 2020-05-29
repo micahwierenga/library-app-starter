@@ -1,7 +1,12 @@
 <%- include('../partials/headerPartial.ejs') %> 
 
 
-Where the form to edit one BOOK goes
+<form action="/books/<%= bookToEditReferenceForEJS._id %>?_method=PUT" method="POST">
+    <input type="text" name="title" placeholder="Title" value="<%= bookToEditReferenceForEJS.title %>"><br>
+    <input type="text" name="yearPublished" placeholder="Year Published" value="<%= bookToEditReferenceForEJS.yearPublished %>"><br>
+    <input type="text" name="coverImageUrl" placeholder="Cover Image URL" value="<%= bookToEditReferenceForEJS.coverImageUrl %>"><br>
+    <input type="submit" value="Update Book">
+</form>
 
 
 

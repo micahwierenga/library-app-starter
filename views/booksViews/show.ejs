@@ -1,8 +1,11 @@
 <%- include('../partials/headerPartial.ejs') %> 
 
+<h3><%= bookReferenceForEJS.title %></h3>
 
-Where one BOOK goes
+<p>Published in <%= bookReferenceForEJS.yearPublished %></p>
 
+<img src="<%= bookReferenceForEJS.coverImageUrl %>" alt="<%= bookReferenceForEJS.title %>"><br><br>
 
+<a href="/books/<%= bookReferenceForEJS._id %>/edit">Edit Book</a>
 
 <%- include('../partials/footerPartial.ejs') %> 

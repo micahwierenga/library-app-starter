@@ -1,8 +1,21 @@
 <%- include('../partials/headerPartial.ejs') %> 
 
-
-Where all the BOOKS go
-
-
+<table>
+    <tr>
+        <td>Title</td>
+        <td>Actions</td>
+    </tr>
+    <% allBooksReferenceForEJS.forEach(function(eachBook) { %>
+        <tr>
+            <td><%= eachBook.title %></td>
+            <td>
+                <a href="/books/<%= eachBook._id %>">DETAILS</a>
+                <form action="/books/<%= eachBook._id %>?_method=DELETE" method="POST" style="display:inline;">
+                    <input type="submit" value="DELETE">
+                </form>
+            </td>
+        </tr>
+    <% }) %>
+</table>
 
 <%- include('../partials/footerPartial.ejs') %> 

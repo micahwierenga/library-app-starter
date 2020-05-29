@@ -1,11 +1,8 @@
 <%- include('../partials/headerPartial.ejs') %> 
 
-
 <form action="/authors/<%= authorToEditReferenceForEJS._id %>?_method=PUT" method="POST">
     <input type="text" name="name" placeholder="Name" value="<%= authorToEditReferenceForEJS.name %>"><br>
     <input type="submit" value="Update Author">
 </form>
-
-
 
 <%- include('../partials/footerPartial.ejs') %> 

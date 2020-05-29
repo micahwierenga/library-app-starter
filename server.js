@@ -11,6 +11,7 @@ require('./config/database');
 const indexRouter = require('./routes/indexRoutes');
 const usersRouter = require('./routes/usersRoutes');
 const authorsRouter = require('./routes/authorsRoutes');
+const booksRouter = require('./routes/booksRoutes');
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use('/', indexRouter);
 // a match for the request url. if not, move on to the next router.
 app.use('/users', usersRouter);
 app.use('/authors', authorsRouter);
+app.use('/books', booksRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

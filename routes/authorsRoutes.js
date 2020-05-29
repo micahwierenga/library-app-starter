@@ -4,7 +4,6 @@ const router = express.Router();
 // REQUESTS TO THEM
 const authorsController = require('../controllers/authorsController');
 
-
 router.get('/', authorsController.getAllAuthors);
 router.get('/new', authorsController.getNewAuthorForm);
 router.get('/:authorId', authorsController.getOneAuthor);
@@ -12,10 +11,6 @@ router.post('/', authorsController.createNewAuthor);
 router.delete('/:authorIdToDelete', authorsController.deleteOneAuthor);
 router.get('/:authorIdForEditForm/edit', authorsController.getEditAuthorForm);
 router.put('/:authorIdToUpdate', authorsController.updateOneAuthor);
-
-
-
-
 
 // IN ORDER TO USE THESE ROUTES, WE MUST EXPORT THEM
 module.exports = router;
