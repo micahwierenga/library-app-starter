@@ -13,6 +13,7 @@ module.exports = {
     getOneAuthor,
     deleteOneAuthor,
     getEditAuthorForm,
+    updateOneAuthor,
 }
 
 // WE'LL NEED CONTROLLERS TO HANDLE THE REQUEST, WHICH
@@ -68,3 +69,8 @@ function getEditAuthorForm(req, res) {
 }
 
 // Define updateOneAuthor (our update route)
+function updateOneAuthor(req, res) {
+    Author.findByIdAndUpdate(req.params.authorIdToUpdate, req.body, {new: true}, function(err, updatedAuthorFromDb) {
+        res.redirect(`/authors/${updatedAuthorFromDb._id}`);
+    })
+}

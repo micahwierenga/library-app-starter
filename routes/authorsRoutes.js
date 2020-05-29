@@ -11,6 +11,7 @@ router.get('/:authorId', authorsController.getOneAuthor);
 router.post('/', authorsController.createNewAuthor);
 router.delete('/:authorIdToDelete', authorsController.deleteOneAuthor);
 router.get('/:authorIdForEditForm/edit', authorsController.getEditAuthorForm);
+router.put('/:authorIdToUpdate', authorsController.updateOneAuthor);
 
 
 
