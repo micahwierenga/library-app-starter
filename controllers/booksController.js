@@ -1,6 +1,7 @@
 // WE'LL NEED THE MODEL IN ORDER TO COMMUNICATE WITH THE DB
 // AND TO VALIDATE THE DATA
 const Book = require('../models/bookModel');
+const Author = require('../models/authorModel');
 
 
 // WE'LL NEED TO EXPORT OUR CONTROLLERS IN ORDER FOR THE
@@ -33,7 +34,9 @@ function getAllBooks(req, res) {
 
 // Define getOneBook (our show route)
 function getOneBook(req, res) {
-    Book.findById(req.params.bookId, function(err, oneBookFromDb) {
+    Book.findById(req.params.bookId)
+    .populate('author')
+    .exec(function(err, oneBookFromDb) {
         res.render('booksViews/show', {
             bookReferenceForEJS: oneBookFromDb
         })
@@ -42,7 +45,11 @@ function getOneBook(req, res) {
 
 // Define getNewBookForm (our new route)
 function getNewBookForm(req, res) {
-    res.render('booksViews/new');
+    Author.find({}, function(err, allAuthorsFromDb) {
+        res.render('booksViews/new', {
+            allAuthorsDropdown: allAuthorsFromDb
+        });
+    })
 }
 
 // Define createNewBook (our create route)
@@ -62,8 +69,11 @@ function deleteOneBook(req, res) {
 // Define getEditBookForm (our edit route)
 function getEditBookForm(req, res) {
     Book.findById(req.params.bookIdForEditForm, function(err, bookToEditFromDb) {
-        res.render('booksViews/edit', {
-            bookToEditReferenceForEJS: bookToEditFromDb
+        Author.find({}, function(err, authorsForDropdown) {
+            res.render('booksViews/edit', {
+                bookToEditReferenceForEJS: bookToEditFromDb,
+                authorsForDropdown
+            })
         })
     })
 }

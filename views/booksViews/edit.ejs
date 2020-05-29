@@ -1,13 +1,21 @@
 <%- include('../partials/headerPartial.ejs') %> 
 
-
 <form action="/books/<%= bookToEditReferenceForEJS._id %>?_method=PUT" method="POST">
+    <select name="author">
+        <% authorsForDropdown.forEach(function(eachAuthor) { %>
+            <option value="<%= eachAuthor._id %>"
+                <% if( JSON.stringify(bookToEditReferenceForEJS.author) === JSON.stringify(eachAuthor._id)) { %>
+                    selected
+                <% } %>
+            >
+                <%= eachAuthor.name %>
+            </option>
+        <% }) %>
+    </select><br>
     <input type="text" name="title" placeholder="Title" value="<%= bookToEditReferenceForEJS.title %>"><br>
     <input type="text" name="yearPublished" placeholder="Year Published" value="<%= bookToEditReferenceForEJS.yearPublished %>"><br>
     <input type="text" name="coverImageUrl" placeholder="Cover Image URL" value="<%= bookToEditReferenceForEJS.coverImageUrl %>"><br>
     <input type="submit" value="Update Book">
 </form>
-
-
 
 <%- include('../partials/footerPartial.ejs') %> 

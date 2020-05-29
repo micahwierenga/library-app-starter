@@ -1,6 +1,7 @@
 // WE'LL NEED THE MODEL IN ORDER TO COMMUNICATE WITH THE DB
 // AND TO VALIDATE THE DATA
 const Author = require('../models/authorModel');
+const Book = require('../models/bookModel');
 
 
 // WE'LL NEED TO EXPORT OUR CONTROLLERS IN ORDER FOR THE
@@ -34,8 +35,11 @@ function getAllAuthors(req, res) {
 // Define getOneAuthor (our show route)
 function getOneAuthor(req, res) {
     Author.findById(req.params.authorId, function(err, oneAuthorFromDb) {
-        res.render('authorsViews/show', {
-            authorReferenceForEJS: oneAuthorFromDb
+        Book.find({author: oneAuthorFromDb._id}, function(err, allBooksByFoundAuthor) {
+            res.render('authorsViews/show', {
+                authorReferenceForEJS: oneAuthorFromDb,
+                allBooksByFoundAuthor
+            })
         })
     })
 }
@@ -55,7 +59,9 @@ function createNewAuthor(req, res) {
 // Define deleteOneAuthor (our delete/destroy route)
 function deleteOneAuthor(req, res) {
     Author.findByIdAndRemove(req.params.authorIdToDelete, function(err, deleteAuthorConfirmation) {
-        res.redirect('/authors');
+        Book.deleteMany({author: req.params.authorIdToDelete}, function(err) {
+            res.redirect('/authors');
+        })
     })
 }
 

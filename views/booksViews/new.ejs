@@ -1,6 +1,11 @@
 <%- include('../partials/headerPartial.ejs') %> 
 
 <form action="/books" method="POST">
+    <select name="author">
+        <% allAuthorsDropdown.forEach(function(eachAuthor) { %>
+            <option value="<%= eachAuthor._id %>"><%= eachAuthor.name %></option>
+        <% }) %>
+    </select><br>
     <input type="text" name="title" placeholder="Title"><br>
     <input type="text" name="yearPublished" placeholder="Year Published"><br>
     <input type="text" name="coverImageUrl" placeholder="Cover Image URL"><br>

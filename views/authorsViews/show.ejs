@@ -2,6 +2,13 @@
 
 <h3><%= authorReferenceForEJS.name %></h3>
 
+<% allBooksByFoundAuthor.forEach(function(eachBook) { %>
+    <div>
+        <p><strong><%= eachBook.title %>, <%= eachBook.yearPublished %></strong></p>
+        <img src="<%= eachBook.coverImageUrl %>" alt="">
+    </div>
+<% }) %>
+
 <a href="/authors/<%= authorReferenceForEJS._id %>/edit">Edit Author</a>
 
-<%- include('../partials/footerPartial.ejs') %> 
+<%- include('../partials/footerPartial.ejs') %>

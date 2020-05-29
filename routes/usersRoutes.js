@@ -1,13 +1,23 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const passport = require('passport');
 
-/* GET users listing. */
-// if the HTTP verb is GET and the full url path is /users/
-// (which is the same as /users after the domain)
-// then use the included callback controller
-router.get('/', function(req, res, next) {
-  // res.send('respond with a resource');
-  res.render('authorsViews/index')
+router.get('/auth/google',
+    passport.authenticate('google', { 
+    scope: ['profile', 'email'] 
+  })
+);
+
+router.get('/oauth2callback',
+  passport.authenticate('google', {
+    successRedirect: '/books',
+    failureRedirect: '/'
+  })
+);
+
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = router;

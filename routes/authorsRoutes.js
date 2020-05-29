@@ -5,12 +5,17 @@ const router = express.Router();
 const authorsController = require('../controllers/authorsController');
 
 router.get('/', authorsController.getAllAuthors);
-router.get('/new', authorsController.getNewAuthorForm);
-router.get('/:authorId', authorsController.getOneAuthor);
-router.post('/', authorsController.createNewAuthor);
-router.delete('/:authorIdToDelete', authorsController.deleteOneAuthor);
-router.get('/:authorIdForEditForm/edit', authorsController.getEditAuthorForm);
-router.put('/:authorIdToUpdate', authorsController.updateOneAuthor);
+router.get('/new', isLoggedIn, authorsController.getNewAuthorForm);
+router.get('/:authorId', isLoggedIn, authorsController.getOneAuthor);
+router.post('/', isLoggedIn, authorsController.createNewAuthor);
+router.delete('/:authorIdToDelete', isLoggedIn, authorsController.deleteOneAuthor);
+router.get('/:authorIdForEditForm/edit', isLoggedIn, authorsController.getEditAuthorForm);
+router.put('/:authorIdToUpdate', isLoggedIn, authorsController.updateOneAuthor);
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) return next();
+    res.redirect('/auth/google');
+}
 
 // IN ORDER TO USE THESE ROUTES, WE MUST EXPORT THEM
 module.exports = router;

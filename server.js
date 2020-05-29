@@ -3,9 +3,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
+const passport = require('passport');
 const methodOverride = require('method-override');
 
+require('dotenv').config();
 require('./config/database');
+require('./config/passport');
 
 // WE NEED TO IMPORT OUR ROUTES IN ORDER TO MOUNT THEM BELOW
 const indexRouter = require('./routes/indexRoutes');
@@ -26,6 +30,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
+app.use(session({
+  secret: 'ILoveBooks',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function(req, res, next) {
+  res.locals.user = req.user;
+  next();
+})
+
 // WE NEED TO MOUNT OUR ROUTES SO THEY CAN THE NEXT STEP IN
 // DIRECTING REQUESTS TO THE PROPER CONTROLLER
 // if the request url begins with a slash (and they all do), see if
@@ -34,7 +51,7 @@ app.use(methodOverride('_method'));
 app.use('/', indexRouter);
 // if the request url begins with /users, see if the usersRouter has
 // a match for the request url. if not, move on to the next router.
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
 app.use('/authors', authorsRouter);
 app.use('/books', booksRouter);
 
